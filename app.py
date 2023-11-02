@@ -53,44 +53,6 @@ def get_recommendations(movie):
 
     return recommended_movie_names,recommended_movie_posters
 
-def display_recommendations(recommendations):
-    for idx, (_, row) in enumerate(recommendations.iterrows()):
-        artist = row['artist_name']
-        track = row['track_name']
-        album = row['album_name']
-        cover_image_url = row['album_image_url']
-        spotify_url = row['track_uri'].replace("/track/", "/embed/track/")
-
-        col1, col2 = st.columns([0.75, 1])
-
-        with col1:
-            st.image(cover_image_url, width=150)
-            st.write(f"**Sanatçı:** {artist}")
-            st.write(f"**Şarkı:** {track}")
-            st.write(f"**Albüm:** {album}")
-
-        with col2:
-            st.write(
-                f'<iframe src="{spotify_url}" width="350" height="180" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>',
-                unsafe_allow_html=True
-            )
-
-        if idx < len(recommendations) - 1:
-            st.markdown("✂➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
-
-
-def create_playlist_from_artists(artists):
-    song_indices = []
-    for artist in artists:
-        artist_songs_df = df[df['artist_name'] == artist]
-        if len(artist_songs_df) <= 3:
-            song_indices.extend(artist_songs_df.index.tolist())
-        else:
-            song_indices.extend(artist_songs_df.sample(3).index.tolist())
-
-    return df.loc[song_indices]
-
-
 st.title('Movie Recommendation System')
 with st.container():
     movie_list = movies['title'].values
