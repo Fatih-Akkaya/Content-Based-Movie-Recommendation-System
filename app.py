@@ -31,6 +31,9 @@ def add_bg_from_local(image_file):
         min-height: -webkit-fill-available;
 
     }}
+    .stMarkdown h1,  .stMarkdown p {{
+        color: rgb(255 255 255 / 80%);
+    }}
     </style>
     """,
         unsafe_allow_html=True
