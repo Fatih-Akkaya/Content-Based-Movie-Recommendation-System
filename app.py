@@ -31,7 +31,7 @@ def add_bg_from_local(image_file):
         min-height: -webkit-fill-available;
 
     }}
-    .stMarkdown h1,  .stMarkdown p {{
+    .stMarkdown h1, .stMarkdown p, stSelectbox p {{
         color: rgb(255 255 255 / 80%);
     }}
     </style>
@@ -48,7 +48,7 @@ def get_recommendations(movie):
     recommended_movie_names = []
     recommended_movie_posters = []
     for i in distances[1:10]:
-        recommended_movie_posters.append(f'https://image.tmdb.org/t/p/w500{movies.loc[index, "poster_path"]}')
+        recommended_movie_posters.append(f'https://image.tmdb.org/t/p/w500{movies.iloc[i[0]].poster_path}')
         recommended_movie_names.append(movies.iloc[i[0]].title)
 
     return recommended_movie_names,recommended_movie_posters
